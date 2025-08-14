@@ -3368,8 +3368,8 @@ body,
   /* Extra small devices */
   @media (max-width: 480px) {
     .nav__logo-img {
-      height: 20px !important;
-      max-width: 85px !important;
+      height: 24px !important;
+      max-width: 100px !important;
     }
 
     .footer__logo-img {
