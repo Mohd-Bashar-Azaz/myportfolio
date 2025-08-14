@@ -921,6 +921,8 @@ body {
 .nav__logo-img {
   height: 35px;
   width: auto;
+  max-width: 120px;
+  object-fit: contain;
   display: block;
 }
 
@@ -1511,9 +1513,16 @@ body,
   }
 
   .nav__logo-img {
-    height: 20px;
+    height: 12px !important;
     width: auto;
-    max-width: 100px;
+    max-width: 60px !important;
+    object-fit: contain;
+    transform: scale(0.9);
+  }
+
+  .nav__logo {
+    transform-origin: left center;
+    transform: scale(0.85);
   }
 
   .nav__actions {
@@ -3356,6 +3365,19 @@ body,
 
   .mobile-no-margin {
     margin: 0 !important;
+  }
+
+  /* Extra small devices */
+  @media (max-width: 480px) {
+    .nav__logo-img {
+      height: 10px !important;
+      max-width: 50px !important;
+      transform: scale(0.8);
+    }
+
+    .nav__logo {
+      transform: scale(0.8);
+    }
   }
 
   .mobile-no-padding {
