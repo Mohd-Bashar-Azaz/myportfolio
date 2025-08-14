@@ -1,7 +1,9 @@
-// Portfolio Website JavaScript
+// Enhanced Portfolio Website JavaScript with Mobile Optimizations
 
 class PortfolioApp {
   constructor() {
+    this.isMobile = window.innerWidth <= 768;
+    this.isMenuOpen = false;
     this.init();
   }
 
@@ -14,6 +16,8 @@ class PortfolioApp {
     this.initContactForm();
     this.initProjectModals();
     this.initHeroImageFallback();
+    this.initMobileOptimizations();
+    this.initTouchInteractions();
   }
 
   setupEventListeners() {
@@ -41,22 +45,184 @@ class PortfolioApp {
     // About tabs
     this.setupAboutTabs();
 
-    // Mobile menu toggle
+    // Enhanced Mobile menu toggle
+    this.setupMobileMenu();
+
+    // Window resize handler
+    window.addEventListener("resize", () => this.handleResize());
+
+    // Touch events for mobile
+    if (this.isMobile) {
+      this.setupTouchEvents();
+    }
+  }
+
+  setupMobileMenu() {
     const navToggle = document.getElementById("nav-toggle");
     const navMenu = document.getElementById("nav-menu");
+    const body = document.body;
+
     if (navToggle && navMenu) {
-      navToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
+      navToggle.addEventListener("click", () => this.toggleMobileMenu());
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          this.isMenuOpen &&
+          !navToggle.contains(e.target) &&
+          !navMenu.contains(e.target)
+        ) {
+          this.closeMobileMenu();
+        }
+      });
+
+      // Close menu on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && this.isMenuOpen) {
+          this.closeMobileMenu();
+        }
+      });
+
+      // Close mobile menu when clicking on links
+      const navLinks = document.querySelectorAll(".nav__link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          this.closeMobileMenu();
+        });
       });
     }
+  }
 
-    // Close mobile menu when clicking on links
-    const navLinks = document.querySelectorAll(".nav__link");
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navMenu) navMenu.classList.remove("active");
+  toggleMobileMenu() {
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const body = document.body;
+
+    if (!navToggle || !navMenu) return;
+
+    this.isMenuOpen = !this.isMenuOpen;
+
+    if (this.isMenuOpen) {
+      navToggle.classList.add("active");
+      navMenu.classList.add("active");
+      body.style.overflow = "hidden";
+
+      // Animate menu items with stagger
+      const menuItems = navMenu.querySelectorAll(".nav__item");
+      menuItems.forEach((item, index) => {
+        item.style.transitionDelay = `${0.1 + index * 0.05}s`;
+      });
+    } else {
+      this.closeMobileMenu();
+    }
+  }
+
+  closeMobileMenu() {
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const body = document.body;
+
+    if (!navToggle || !navMenu) return;
+
+    this.isMenuOpen = false;
+    navToggle.classList.remove("active");
+    navMenu.classList.remove("active");
+    body.style.overflow = "";
+
+    // Reset transition delays
+    const menuItems = navMenu.querySelectorAll(".nav__item");
+    menuItems.forEach((item) => {
+      item.style.transitionDelay = "0s";
+    });
+  }
+
+  setupTouchEvents() {
+    // Add touch feedback to buttons
+    const touchElements = document.querySelectorAll(
+      ".btn, .nav__link, .about__tab, .testimonial__nav"
+    );
+
+    touchElements.forEach((element) => {
+      element.addEventListener("touchstart", () => {
+        element.style.transform = "scale(0.95)";
+      });
+
+      element.addEventListener("touchend", () => {
+        element.style.transform = "";
       });
     });
+
+    // Swipe gestures for testimonials
+    this.setupSwipeGestures();
+  }
+
+  setupSwipeGestures() {
+    const testimonialsSlider = document.querySelector(".testimonials__slider");
+    if (!testimonialsSlider) return;
+
+    let startX = 0;
+    let endX = 0;
+    let isDragging = false;
+
+    testimonialsSlider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+
+    testimonialsSlider.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+    });
+
+    testimonialsSlider.addEventListener("touchend", (e) => {
+      if (!isDragging) return;
+
+      endX = e.changedTouches[0].clientX;
+      const diffX = startX - endX;
+      const threshold = 50;
+
+      if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) {
+          // Swipe left - next testimonial
+          this.nextTestimonial();
+        } else {
+          // Swipe right - previous testimonial
+          this.prevTestimonial();
+        }
+      }
+
+      isDragging = false;
+    });
+  }
+
+  handleResize() {
+    const wasMobile = this.isMobile;
+    this.isMobile = window.innerWidth <= 768;
+
+    // Handle mobile/desktop transition
+    if (wasMobile !== this.isMobile) {
+      if (!this.isMobile) {
+        this.closeMobileMenu();
+      }
+      this.updateLayoutForScreenSize();
+    }
+  }
+
+  updateLayoutForScreenSize() {
+    // Update layout based on screen size
+    const elements = document.querySelectorAll(
+      ".service__card, .project__card, .testimonial__card"
+    );
+
+    if (this.isMobile) {
+      elements.forEach((el) => {
+        el.classList.add("scroll-animate");
+      });
+    } else {
+      elements.forEach((el) => {
+        el.classList.remove("scroll-animate");
+      });
+    }
   }
 
   setupNavigation() {
@@ -90,10 +256,10 @@ class PortfolioApp {
       });
     });
 
-    // Update active nav link on scroll
+    // Update active nav link on scroll with mobile optimization
     const updateActiveNavLink = () => {
       let current = "";
-      const scrollY = window.pageYOffset + 100; // Add offset for better detection
+      const scrollY = window.pageYOffset + (this.isMobile ? 120 : 100);
 
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
@@ -118,7 +284,10 @@ class PortfolioApp {
       });
     };
 
-    window.addEventListener("scroll", updateActiveNavLink);
+    // Debounced scroll handler for better performance
+    const debouncedUpdateNav = this.debounce(updateActiveNavLink, 10);
+    window.addEventListener("scroll", debouncedUpdateNav);
+
     // Initialize active link
     updateActiveNavLink();
   }
@@ -250,6 +419,11 @@ class PortfolioApp {
           if (entry.isIntersecting) {
             entry.target.style.opacity = "1";
             entry.target.style.transform = "translateY(0)";
+
+            // Add mobile-specific animations
+            if (this.isMobile) {
+              entry.target.classList.add("animate");
+            }
           }
         });
       },
@@ -267,6 +441,11 @@ class PortfolioApp {
       el.style.opacity = "0";
       el.style.transform = "translateY(50px)";
       el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+
+      if (this.isMobile) {
+        el.classList.add("scroll-animate");
+      }
+
       observer.observe(el);
     });
   }
@@ -290,6 +469,7 @@ class PortfolioApp {
       img.addEventListener("error", showInitials, { once: true });
     }
   }
+
   initTestimonials() {
     const testimonials = document.querySelectorAll(".testimonial__card");
     const indicators = document.querySelectorAll(".testimonial__indicator");
@@ -298,7 +478,7 @@ class PortfolioApp {
 
     if (testimonials.length === 0) return;
 
-    let currentTestimonial = 0;
+    this.currentTestimonial = 0;
 
     const showTestimonial = (index) => {
       // Hide all testimonials
@@ -316,30 +496,34 @@ class PortfolioApp {
       }
     };
 
-    const nextTestimonial = () => {
-      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-      showTestimonial(currentTestimonial);
+    // Store methods for swipe gestures
+    this.nextTestimonial = () => {
+      this.currentTestimonial =
+        (this.currentTestimonial + 1) % testimonials.length;
+      showTestimonial(this.currentTestimonial);
     };
 
-    const prevTestimonial = () => {
-      currentTestimonial =
-        (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-      showTestimonial(currentTestimonial);
+    this.prevTestimonial = () => {
+      this.currentTestimonial =
+        (this.currentTestimonial - 1 + testimonials.length) %
+        testimonials.length;
+      showTestimonial(this.currentTestimonial);
     };
 
     // Event listeners
-    if (nextBtn) nextBtn.addEventListener("click", nextTestimonial);
-    if (prevBtn) prevBtn.addEventListener("click", prevTestimonial);
+    if (nextBtn) nextBtn.addEventListener("click", this.nextTestimonial);
+    if (prevBtn) prevBtn.addEventListener("click", this.prevTestimonial);
 
     indicators.forEach((indicator, index) => {
       indicator.addEventListener("click", () => {
-        currentTestimonial = index;
-        showTestimonial(currentTestimonial);
+        this.currentTestimonial = index;
+        showTestimonial(this.currentTestimonial);
       });
     });
 
-    // Auto-advance testimonials
-    setInterval(nextTestimonial, 5000);
+    // Auto-advance testimonials (slower on mobile)
+    const autoAdvanceInterval = this.isMobile ? 7000 : 5000;
+    setInterval(this.nextTestimonial, autoAdvanceInterval);
 
     // Initialize first testimonial
     showTestimonial(0);
@@ -798,18 +982,104 @@ class PortfolioApp {
     modal.classList.remove("hidden");
     document.body.style.overflow = "hidden";
   }
+
+  // Utility function for debouncing
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  initMobileOptimizations() {
+    // Add mobile-specific classes
+    if (this.isMobile) {
+      document.body.classList.add("mobile");
+      this.updateLayoutForScreenSize();
+    }
+
+    // Optimize images for mobile
+    this.optimizeImagesForMobile();
+
+    // Add mobile-specific animations
+    this.initMobileAnimations();
+  }
+
+  optimizeImagesForMobile() {
+    const images = document.querySelectorAll("img");
+    images.forEach((img) => {
+      if (this.isMobile) {
+        img.style.maxWidth = "100%";
+        img.style.height = "auto";
+      }
+    });
+  }
+
+  initMobileAnimations() {
+    // Intersection Observer for mobile scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate");
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements for mobile animations
+    const animatedElements = document.querySelectorAll(".scroll-animate");
+    animatedElements.forEach((el) => observer.observe(el));
+  }
+
+  initTouchInteractions() {
+    // Additional touch optimizations
+    if (this.isMobile) {
+      // Prevent zoom on double tap
+      let lastTouchEnd = 0;
+      document.addEventListener(
+        "touchend",
+        (event) => {
+          const now = new Date().getTime();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        false
+      );
+
+      // Add haptic feedback for mobile (if supported)
+      if ("vibrate" in navigator) {
+        const hapticElements = document.querySelectorAll(".btn, .nav__link");
+        hapticElements.forEach((el) => {
+          el.addEventListener("touchstart", () => {
+            navigator.vibrate(10);
+          });
+        });
+      }
+    }
+  }
 }
 
 // Initialize the portfolio app when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  new PortfolioApp();
+  const app = new PortfolioApp();
 
   // Add loading animation to page
   setTimeout(() => {
     document.body.classList.add("loaded");
   }, 100);
 
-  // Enhance form inputs with focus effects
+  // Enhanced form inputs with focus effects
   const formInputs = document.querySelectorAll(".form-control");
   formInputs.forEach((input) => {
     input.addEventListener("focus", () => {
@@ -827,8 +1097,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Add parallax effect to hero section
+  // Enhanced parallax effect with mobile optimization
   const handleParallax = () => {
+    if (window.innerWidth <= 768) return; // Disable on mobile for performance
+
     const scrolled = window.pageYOffset;
     const rate = scrolled * -0.3;
     const particles = document.querySelector(".hero__particles");
@@ -838,9 +1110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  window.addEventListener("scroll", handleParallax);
+  window.addEventListener("scroll", app.debounce(handleParallax, 10));
 
-  // Add typing animation to hero title
+  // Enhanced typing animation for mobile
   const animatedTitle = document.querySelector(".hero__title-line--animated");
   if (animatedTitle) {
     const text = animatedTitle.textContent;
@@ -851,7 +1123,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i < text.length) {
         animatedTitle.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 100);
+        const delay = window.innerWidth <= 768 ? 80 : 100; // Faster on mobile
+        setTimeout(typeWriter, delay);
       }
     };
 
@@ -859,16 +1132,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
+// Performance optimization: Enhanced debounce function
+function debounce(func, wait, immediate) {
   let timeout;
   return function executedFunction(...args) {
     const later = () => {
-      clearTimeout(timeout);
-      func(...args);
+      timeout = null;
+      if (!immediate) func(...args);
     };
+    const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
+    if (callNow) func(...args);
   };
 }
 
@@ -878,3 +1153,9 @@ const debouncedScrollHandler = debounce(() => {
 }, 10);
 
 window.addEventListener("scroll", debouncedScrollHandler);
+
+// Add mobile-specific CSS variables
+if (window.innerWidth <= 768) {
+  document.documentElement.style.setProperty("--mobile-padding", "16px");
+  document.documentElement.style.setProperty("--mobile-gap", "12px");
+}
