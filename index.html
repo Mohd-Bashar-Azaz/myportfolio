@@ -218,6 +218,7 @@
     <section class="about" id="about">
       <div class="container">
         <div class="section__header">
+          <span class="section__eyebrow">Profile Snapshot</span>
           <h2 class="section__title">About Me</h2>
           <p class="section__subtitle">
             I enjoy solving real-world problems and delivering robust, secure
@@ -226,6 +227,36 @@
           </p>
         </div>
         <div class="about__content">
+          <div class="about__intro">
+            <div class="about__intro-copy">
+              <span class="about__intro-label">Backend-focused developer</span>
+              <h3 class="about__intro-title">
+                Building reliable systems, clean APIs, and practical product
+                features.
+              </h3>
+              <p class="about__intro-text">
+                I like working close to real business problems, especially in
+                products that need secure integrations, solid data handling, and
+                maintainable backend architecture. My recent work has centered
+                on e-commerce workflows, payments, notifications, and platform
+                performance.
+              </p>
+            </div>
+            <div class="about__highlights">
+              <div class="about__highlight">
+                <strong>1+ year</strong>
+                <span>Hands-on product development experience</span>
+              </div>
+              <div class="about__highlight">
+                <strong>Laravel + MySQL</strong>
+                <span>Core stack for production backend work</span>
+              </div>
+              <div class="about__highlight">
+                <strong>APIs + Integrations</strong>
+                <span>Payments, auth, messaging, storage, and automation</span>
+              </div>
+            </div>
+          </div>
           <div class="about__tabs">
             <button class="about__tab active" data-tab="skills">Skills</button>
             <button class="about__tab" data-tab="experience">Experience</button>
@@ -441,59 +472,98 @@
     <section class="services" id="services">
       <div class="container">
         <div class="section__header">
+          <span class="section__eyebrow">What I Build</span>
           <h2 class="section__title">Services</h2>
           <p class="section__subtitle">
-            Comprehensive development services tailored to your needs
+            Practical engineering support for modern products, from backend
+            systems and APIs to integrations that keep the business running
+            smoothly.
           </p>
         </div>
         <div class="services__grid">
           <div class="service__card">
-            <div class="service__icon">💻</div>
+            <div class="service__icon" aria-hidden="true">&#128187;</div>
+            <span class="service__label">End-to-End Builds</span>
             <h3 class="service__title">Full Stack Development</h3>
             <p class="service__description">
-              End-to-end web development using modern technologies like Laravel,
-              React, and Node.js
+              Complete web product development with dependable backend logic,
+              clean interfaces, and production-ready implementation.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">Laravel</span>
+              <span class="service__tag">React</span>
+              <span class="service__tag">Node.js</span>
+            </div>
           </div>
           <div class="service__card">
-            <div class="service__icon">🔧</div>
+            <div class="service__icon" aria-hidden="true">&#128295;</div>
+            <span class="service__label">Core Systems</span>
             <h3 class="service__title">Backend Development</h3>
             <p class="service__description">
-              Robust server-side development with Laravel and MySQL for scalable
-              applications
+              Robust server-side architecture for scalable applications with
+              secure business logic, validation, and database design.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">Laravel</span>
+              <span class="service__tag">MySQL</span>
+              <span class="service__tag">Auth</span>
+            </div>
           </div>
           <div class="service__card">
-            <div class="service__icon">🔗</div>
+            <div class="service__icon" aria-hidden="true">&#128279;</div>
+            <span class="service__label">Connected Apps</span>
             <h3 class="service__title">API Development</h3>
             <p class="service__description">
-              RESTful API creation and optimization for seamless data exchange
-              between applications
+              REST API design and optimization for fast, reliable communication
+              between web apps, mobile apps, and third-party services.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">REST APIs</span>
+              <span class="service__tag">Postman</span>
+              <span class="service__tag">JSON</span>
+            </div>
           </div>
           <div class="service__card">
-            <div class="service__icon">💳</div>
+            <div class="service__icon" aria-hidden="true">&#128179;</div>
+            <span class="service__label">Secure Transactions</span>
             <h3 class="service__title">Payment Integration</h3>
             <p class="service__description">
-              Secure payment gateway integration including PhonePe and other
-              popular providers
+              Payment gateway integration with safer checkout flows, callback
+              handling, and transaction status synchronization.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">PhonePe</span>
+              <span class="service__tag">Callbacks</span>
+              <span class="service__tag">Security</span>
+            </div>
           </div>
           <div class="service__card">
-            <div class="service__icon">🔔</div>
+            <div class="service__icon" aria-hidden="true">&#128276;</div>
+            <span class="service__label">Realtime Messaging</span>
             <h3 class="service__title">Firebase Services</h3>
             <p class="service__description">
-              Implementation of Firebase features including push notifications
-              and cloud messaging
+              Firebase integrations for push notifications, device token
+              management, and event-driven user engagement.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">FCM</span>
+              <span class="service__tag">Notifications</span>
+              <span class="service__tag">Realtime</span>
+            </div>
           </div>
           <div class="service__card">
-            <div class="service__icon">🗃️</div>
+            <div class="service__icon" aria-hidden="true">&#128451;&#65039;</div>
+            <span class="service__label">Data Layer</span>
             <h3 class="service__title">Database Management</h3>
             <p class="service__description">
-              Database design, optimization, and management using MySQL and
-              modern practices
+              Structured database design, query optimization, and reliable data
+              handling for performance-focused applications.
             </p>
+            <div class="service__meta">
+              <span class="service__tag">Schema Design</span>
+              <span class="service__tag">Optimization</span>
+              <span class="service__tag">MySQL</span>
+            </div>
           </div>
         </div>
       </div>
@@ -503,61 +573,123 @@
     <section class="portfolio" id="portfolio">
       <div class="container">
         <div class="section__header">
+          <span class="section__eyebrow">Selected Work</span>
           <h2 class="section__title">Portfolio</h2>
           <p class="section__subtitle">
-            Showcasing my latest projects and achievements
+            A few product and platform problems I have worked on, with a strong
+            focus on backend quality, integrations, and measurable impact.
           </p>
         </div>
         <div class="portfolio__grid">
-          <div class="project__card" data-project="vegingo">
+          <div class="project__card project__card--featured" data-project="vegingo">
             <div class="project__image">
-              <div class="project__image-placeholder">E-commerce</div>
+              <div class="project__image-placeholder project__image-placeholder--vegingo">
+                <div class="project__brand project__brand--vegingo">
+                  <img
+                    src="brand-logo.png"
+                    alt="Vegingo logo"
+                    class="project__brand-logo"
+                  />
+                  <div class="project__brand-copy">
+                    <span class="project__brand-name">Vegingo</span>
+                    <span class="project__brand-tagline">Freshness delivered to your doorstep</span>
+                  </div>
+                </div>
+                <div class="project__stats">
+                  <span class="project__stat"><strong>40%</strong> backend improvement</span>
+                  <span class="project__stat"><strong>35%</strong> faster response time</span>
+                </div>
+              </div>
             </div>
             <div class="project__content">
+              <div class="project__meta-head">
+                <span class="project__eyebrow">Flagship Product</span>
+                <span class="project__year">2024-2025</span>
+              </div>
               <h3 class="project__title">Vegingo E-commerce Platform</h3>
               <p class="project__description">
-                Enhanced e-commerce platform focusing on backend development,
-                API optimization, and database management
+                Worked on the core backend of a live grocery e-commerce
+                platform, improving APIs, database structure, auth flows, and
+                performance for day-to-day operations.
               </p>
+              <ul class="project__points">
+                <li>Optimized backend flows for products, cart, orders, and reviews</li>
+                <li>Improved API responsiveness and developer maintainability</li>
+                <li>Supported a production platform with real business impact</li>
+              </ul>
               <div class="project__tech">
                 <span class="tech__tag">Laravel</span>
                 <span class="tech__tag">MySQL</span>
                 <span class="tech__tag">REST APIs</span>
+                <span class="tech__tag">E-commerce</span>
               </div>
+              <button class="project__cta" type="button">View Case Study</button>
             </div>
           </div>
           <div class="project__card" data-project="payment">
             <div class="project__image">
-              <div class="project__image-placeholder">Payment</div>
+              <div class="project__image-placeholder project__image-placeholder--payment">
+                <span class="project__image-label">PhonePe Payment Flow</span>
+                <div class="project__mini-stack">
+                  <span class="project__mini-chip">Checkout</span>
+                  <span class="project__mini-chip">Callback</span>
+                  <span class="project__mini-chip">Status Sync</span>
+                </div>
+              </div>
             </div>
             <div class="project__content">
+              <div class="project__meta-head">
+                <span class="project__eyebrow">Integration Build</span>
+                <span class="project__year">Production</span>
+              </div>
               <h3 class="project__title">Payment Gateway Integration</h3>
               <p class="project__description">
-                Implemented secure payment processing with PhonePe gateway
-                integration
+                Designed and implemented secure payment processing with PhonePe,
+                including callbacks, verification, and user-friendly flows.
               </p>
+              <ul class="project__points">
+                <li>Handled safer transaction flows and status callbacks</li>
+                <li>Reduced payment friction through cleaner backend orchestration</li>
+              </ul>
               <div class="project__tech">
                 <span class="tech__tag">PhonePe API</span>
                 <span class="tech__tag">Laravel</span>
                 <span class="tech__tag">Security</span>
               </div>
+              <button class="project__cta" type="button">View Case Study</button>
             </div>
           </div>
           <div class="project__card" data-project="notification">
             <div class="project__image">
-              <div class="project__image-placeholder">Notifications</div>
+              <div class="project__image-placeholder project__image-placeholder--notification">
+                <span class="project__image-label">Realtime Notification Engine</span>
+                <div class="project__signal-bars" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
             </div>
             <div class="project__content">
+              <div class="project__meta-head">
+                <span class="project__eyebrow">Realtime System</span>
+                <span class="project__year">FCM</span>
+              </div>
               <h3 class="project__title">Push Notification System</h3>
               <p class="project__description">
-                Developed comprehensive push notification system using Firebase
-                Cloud Messaging
+                Built a Firebase-based push notification system for reliable
+                realtime delivery, token management, and cross-platform support.
               </p>
+              <ul class="project__points">
+                <li>Supported event-driven messaging and delivery tracking</li>
+                <li>Designed for speed, scale, and repeatable notifications</li>
+              </ul>
               <div class="project__tech">
                 <span class="tech__tag">Firebase</span>
                 <span class="tech__tag">FCM</span>
                 <span class="tech__tag">JavaScript</span>
               </div>
+              <button class="project__cta" type="button">View Case Study</button>
             </div>
           </div>
         </div>
@@ -579,76 +711,104 @@
     <section class="testimonials" id="testimonials">
       <div class="container">
         <div class="section__header">
+          <span class="section__eyebrow">Social Proof</span>
           <h2 class="section__title">Testimonials</h2>
           <p class="section__subtitle">
-            What colleagues and team members say about my work
+            Feedback from people I have worked with on real product and
+            engineering work.
           </p>
         </div>
         <div class="testimonials__slider">
           <div class="testimonial__card active">
             <div class="testimonial__content">
+              <div class="testimonial__badge">Backend & Platform Work</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">�</div>
               <p class="testimonial__text">
-                "Bashar demonstrated exceptional backend development skills
+                Bashar demonstrated exceptional backend development skills
                 during his time at Vegingo. His ability to optimize APIs and
-                manage complex database operations was impressive."
+                manage complex database operations was impressive.
               </p>
               <div class="testimonial__author">
-                <h4 class="testimonial__name">Senior Developer</h4>
-                <p class="testimonial__role">Team Lead at Vegingo</p>
+                <div class="testimonial__avatar">SD</div>
+                <div class="testimonial__author-info">
+                  <h4 class="testimonial__name">Senior Developer</h4>
+                  <p class="testimonial__role">Team Lead at Vegingo</p>
+                </div>
               </div>
             </div>
           </div>
           <div class="testimonial__card">
             <div class="testimonial__content">
+              <div class="testimonial__badge">Full Stack Collaboration</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">�</div>
               <p class="testimonial__text">
-                "I had the opportunity to work with Bashar during our internship
-                at VeginGo, and I was truly impressed by his technical expertise
-                and problem-solving abilities. He is highly skilled in both the
-                MERN stack and Laravel, making him a versatile full-stack
-                developer. His deep understanding of backend development,
-                particularly in building and optimizing APIs, sets him apart as
-                an API master. Bashar’s ability to design scalable solutions and
-                efficiently integrate frontend and backend systems is
-                remarkable. His strong analytical skills, eagerness to learn,
-                and commitment to high-quality code make him an invaluable asset
-                to any team. Beyond his technical skills, he is a great team
-                player, always ready to collaborate and contribute innovative
-                ideas. I highly recommend Bashar for any role that requires
-                expertise in MERN, Laravel, and API development. He will
-                undoubtedly bring great value to any organization."
+                I was impressed by Bashar’s technical depth, problem-solving,
+                and ability to build scalable solutions across Laravel and the
+                MERN stack. His backend expertise, especially around APIs,
+                stands out, and he consistently brings both quality and
+                collaboration to the team. He would add real value to any
+                engineering organization.
               </p>
               <div class="testimonial__author">
-                <h4 class="testimonial__name">Mohd Rafey</h4>
-                <p class="testimonial__role">
-                  Software Engineer • Full Stack Developer (MERN)
-                </p>
+                <div class="testimonial__avatar">MR</div>
+                <div class="testimonial__author-info">
+                  <h4 class="testimonial__name">Mohd Rafey</h4>
+                  <p class="testimonial__role">
+                    Software Engineer • Full Stack Developer (MERN)
+                  </p>
+                </div>
               </div>
             </div>
           </div>
           <div class="testimonial__card">
             <div class="testimonial__content">
+              <div class="testimonial__badge">Team Reliability</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">�</div>
               <p class="testimonial__text">
-                "His dedication to learning and problem-solving made him a
+                His dedication to learning and problem-solving made him a
                 valuable team member. Bashar consistently delivered quality code
-                and showed great attention to detail."
+                and showed great attention to detail.
               </p>
               <div class="testimonial__author">
-                <h4 class="testimonial__name">Project Manager</h4>
-                <p class="testimonial__role">Technical Lead at Vegingo</p>
+                <div class="testimonial__avatar">PM</div>
+                <div class="testimonial__author-info">
+                  <h4 class="testimonial__name">Project Manager</h4>
+                  <p class="testimonial__role">Technical Lead at Vegingo</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="testimonials__controls">
-          <button class="testimonial__nav testimonial__nav--prev">
+          <button
+            class="testimonial__nav testimonial__nav--prev"
+            type="button"
+            aria-label="Previous testimonial"
+          >
             &larr;
           </button>
           <div class="testimonial__indicators">
-            <span class="testimonial__indicator active"></span>
-            <span class="testimonial__indicator"></span>
-            <span class="testimonial__indicator"></span>
+            <button
+              class="testimonial__indicator active"
+              type="button"
+              aria-label="Go to testimonial 1"
+            ></button>
+            <button
+              class="testimonial__indicator"
+              type="button"
+              aria-label="Go to testimonial 2"
+            ></button>
+            <button
+              class="testimonial__indicator"
+              type="button"
+              aria-label="Go to testimonial 3"
+            ></button>
           </div>
-          <button class="testimonial__nav testimonial__nav--next">
+          <button
+            class="testimonial__nav testimonial__nav--next"
+            type="button"
+            aria-label="Next testimonial"
+          >
             &rarr;
           </button>
         </div>
@@ -668,7 +828,7 @@
           <div class="contact__info">
             <h3 class="contact__info-title">Contact Information</h3>
             <div class="contact__item">
-              <span class="contact__icon">📧</span>
+              <span class="contact__icon">&#128231;</span>
               <div class="contact__details">
                 <h4>Email</h4>
                 <a href="mailto:m.basharazaz@gmail.com"
@@ -677,14 +837,14 @@
               </div>
             </div>
             <div class="contact__item">
-              <span class="contact__icon">📍</span>
+              <span class="contact__icon">&#128205;</span>
               <div class="contact__details">
                 <h4>Location</h4>
                 <p>Barabanki, Uttar Pradesh, India</p>
               </div>
             </div>
             <div class="contact__item">
-              <span class="contact__icon">💼</span>
+              <span class="contact__icon">&#128188;</span>
               <div class="contact__details">
                 <h4>LinkedIn</h4>
                 <a
@@ -861,7 +1021,11 @@
         </div>
       </div>
     </footer>
-
     <script src="app.js"></script>
   </body>
 </html>
+
+
+
+
+

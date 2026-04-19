@@ -216,6 +216,13 @@ class PortfolioApp {
 
     if (this.isMobile) {
       elements.forEach((el) => {
+        if (el.classList.contains("testimonial__card")) {
+          el.classList.remove("scroll-animate", "animate");
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          return;
+        }
+
         el.classList.add("scroll-animate");
       });
     } else {
@@ -448,6 +455,14 @@ class PortfolioApp {
 
       observer.observe(el);
     });
+
+    // Keep stacked testimonials visible on mobile instead of waiting for scroll reveal.
+    if (this.isMobile) {
+      document.querySelectorAll(".testimonial__card").forEach((card) => {
+        card.style.opacity = "1";
+        card.style.transform = "none";
+      });
+    }
   }
 
   initHeroImageFallback() {
@@ -753,10 +768,12 @@ class PortfolioApp {
     // Project data for modals
     const projectData = {
       vegingo: {
+        id: "vegingo",
         title: "Vegingo E-commerce Platform",
         description:
           "Enhanced e-commerce platform focusing on backend development, API optimization, and database management. Built with Laravel and MySQL, this project showcased my ability to work with complex backend systems and deliver scalable solutions.",
         technologies: ["Laravel", "MySQL", "REST APIs", "PHP", "JavaScript"],
+        metrics: ["40% backend improvement", "35% faster response time"],
         highlights: [
           "Improved backend performance by 40%",
           "Optimized API endpoints for faster response times",
@@ -772,6 +789,7 @@ class PortfolioApp {
         ],
       },
       payment: {
+        id: "payment",
         title: "Payment Gateway Integration",
         description:
           "Implemented secure payment processing with PhonePe gateway integration. This project involved creating a seamless payment flow with proper error handling, security protocols, and user-friendly interfaces.",
@@ -797,6 +815,7 @@ class PortfolioApp {
         ],
       },
       notification: {
+        id: "notification",
         title: "Push Notification System",
         description:
           "Developed comprehensive push notification system using Firebase Cloud Messaging. The system supports real-time notifications across multiple platforms with advanced targeting and analytics capabilities.",
@@ -864,8 +883,76 @@ class PortfolioApp {
 
     if (!modalBody) return;
 
+    const brandBlock =
+      project.id === "vegingo"
+        ? `
+            <div style="
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                padding: 14px 16px;
+                border-radius: 18px;
+                background: linear-gradient(135deg, rgba(87, 191, 39, 0.14), rgba(255, 190, 92, 0.12));
+                border: 1px solid rgba(87, 191, 39, 0.2);
+                margin-bottom: var(--space-20);
+            ">
+                <img
+                    src="brand-logo.png"
+                    alt="Vegingo logo"
+                    style="
+                        width: 58px;
+                        height: 58px;
+                        object-fit: contain;
+                        flex-shrink: 0;
+                    "
+                />
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 1.5rem; font-weight: 800; color: #57bf27; line-height: 1;">Vegingo</span>
+                    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary);">
+                        Freshness delivered to your doorstep
+                    </span>
+                </div>
+            </div>
+          `
+        : "";
+
+    const metricsBlock = project.metrics?.length
+      ? `
+            <div class="project-modal__section" style="margin-bottom: var(--space-24);">
+                <h3 style="
+                    font-size: var(--font-size-xl);
+                    font-weight: var(--font-weight-semibold);
+                    color: var(--color-primary);
+                    margin-bottom: var(--space-12);
+                ">Key Metrics</h3>
+                <div style="
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: var(--space-8);
+                ">
+                    ${project.metrics
+                      .map(
+                        (metric) => `
+                            <span style="
+                                padding: var(--space-8) var(--space-16);
+                                border-radius: var(--radius-full);
+                                background: rgba(var(--color-primary-rgb), 0.08);
+                                border: 1px solid rgba(var(--color-primary-rgb), 0.14);
+                                color: var(--color-text);
+                                font-size: var(--font-size-sm);
+                                font-weight: var(--font-weight-semibold);
+                            ">${metric}</span>
+                        `
+                      )
+                      .join("")}
+                </div>
+            </div>
+        `
+      : "";
+
     modalBody.innerHTML = `
             <div class="project-modal">
+                ${brandBlock}
                 <h2 class="project-modal__title" style="
                     font-size: var(--font-size-3xl);
                     font-weight: var(--font-weight-bold);
@@ -908,6 +995,8 @@ class PortfolioApp {
                           .join("")}
                     </div>
                 </div>
+
+                ${metricsBlock}
                 
                 <div class="project-modal__section" style="margin-bottom: var(--space-24);">
                     <h3 style="
