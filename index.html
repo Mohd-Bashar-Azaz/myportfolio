@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mohd Bashar Azaz â€” CS Undergrad & Backend Developer Intern</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#14b8a6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="MBA Portfolio" />
+    <meta name="description" content="CS Undergrad & Backend Developer Intern â€” Portfolio website" />
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+    <link rel="icon" href="icons/icon-192x192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -722,7 +730,7 @@
           <div class="testimonial__card active">
             <div class="testimonial__content">
               <div class="testimonial__badge">Backend & Platform Work</div>
-              <div class="testimonial__quote-mark" aria-hidden="true">“</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">ï¿½</div>
               <p class="testimonial__text">
                 Bashar demonstrated exceptional backend development skills
                 during his time at Vegingo. His ability to optimize APIs and
@@ -740,7 +748,7 @@
           <div class="testimonial__card">
             <div class="testimonial__content">
               <div class="testimonial__badge">Full Stack Collaboration</div>
-              <div class="testimonial__quote-mark" aria-hidden="true">“</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">ï¿½</div>
               <p class="testimonial__text">
                 I was impressed by Basharâ€™s technical depth, problem-solving,
                 and ability to build scalable solutions across Laravel and the
@@ -763,7 +771,7 @@
           <div class="testimonial__card">
             <div class="testimonial__content">
               <div class="testimonial__badge">Team Reliability</div>
-              <div class="testimonial__quote-mark" aria-hidden="true">“</div>
+              <div class="testimonial__quote-mark" aria-hidden="true">ï¿½</div>
               <p class="testimonial__text">
                 His dedication to learning and problem-solving made him a
                 valuable team member. Bashar consistently delivered quality code
@@ -1022,6 +1030,15 @@
       </div>
     </footer>
     <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW registration failed:', err));
+      });
+    }
+  </script>
   </body>
 </html>
 
